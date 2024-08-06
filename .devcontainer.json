@@ -1,0 +1,27 @@
+{
+  "name": "WordPress Dev Container",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "wordpress",
+  "workspaceFolder": "/var/www/html",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
+      ]
+    },
+    "settings": {
+      "terminal.integrated.shell.linux": "/bin/bash"
+    }
+  },
+  // "settings": {
+  //   "terminal.integrated.shell.linux": "/bin/bash"
+  // },
+  // "extensions": [
+  //   "ms-azuretools.vscode-docker",
+  //   "esbenp.prettier-vscode",
+  //   "dbaeumer.vscode-eslint"
+  // ],
+  "postCreateCommand": "chown -R www-data:www-data /var/www/html"
+}
