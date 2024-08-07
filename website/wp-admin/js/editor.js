@@ -265,7 +265,7 @@ window.wp = window.wp || {};
 		}
 
 		/**
-		 * Gets a list of unique shortcodes or shortcode-look-alikes in the content.
+		 * Gets a list of unique shortcodes or shortcode-lookalikes in the content.
 		 *
 		 * @param {string} content The content we want to scan for shortcodes.
 		 */
@@ -371,7 +371,7 @@ window.wp = window.wp || {};
 		 * Using DomQuery syntax to create it, since it's used as both text and as a DOM element.
 		 *
 		 * @param {Object} domLib DOM library instance.
-		 * @param {string} content The content to insert into the cusror marker element.
+		 * @param {string} content The content to insert into the cursor marker element.
 		 */
 		function getCursorMarkerSpan( domLib, content ) {
 			return domLib( '<span>' ).css( {
@@ -561,7 +561,7 @@ window.wp = window.wp || {};
 		 * By default TinyMCE wraps loose inline tags in a `<p>`.
 		 * When removing selection markers an empty `<p>` may be left behind, remove it.
 		 *
-		 * @param {Object} $marker The marker to be removed from the editor DOM, wrapped in an instnce of `editor.$`
+		 * @param {Object} $marker The marker to be removed from the editor DOM, wrapped in an instance of `editor.$`
 		 */
 		function removeSelectionMarker( $marker ) {
 			var $markerParent = $marker.parent();
@@ -1178,7 +1178,7 @@ window.wp = window.wp || {};
 		}
 
 		if ( $ ) {
-			$( document ).ready( init );
+			$( init );
 		} else if ( document.addEventListener ) {
 			document.addEventListener( 'DOMContentLoaded', init, false );
 			window.addEventListener( 'load', init, false );

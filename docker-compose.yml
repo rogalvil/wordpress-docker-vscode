@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   wordpress:
-    image: wordpress:php7.2-apache
+    image: wordpress:php8.2-apache
     ports:
       - "8000:80"
     environment:
