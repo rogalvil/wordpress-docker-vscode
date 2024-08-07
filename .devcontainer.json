@@ -1,7 +1,5 @@
 {
   "name": "WordPress Dev Container",
-  // "dockerFile": "Dockerfile",
-  // "context": ".",
   "dockerComposeFile": "docker-compose.yml",
   "service": "wordpress",
   "workspaceFolder": "/var/www/html",

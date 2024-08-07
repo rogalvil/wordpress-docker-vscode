@@ -15,12 +15,12 @@ configured to run in Docker containers.
 
 ```
 .
-├── .devcontainer
-│   └── devcontainer.json
+├── .devcontainer.json
 ├── website
 │   └── (your WordPress installation)
 ├── data
 │   └── (MySQL database data)
+├── Dockerfile
 ├── docker-compose.yml
 └── README.md
 ```
@@ -39,9 +39,23 @@ configured to run in Docker containers.
   mkdir website data
   ```
 
-3. **Configure DevContainer:**
-  Create a file named devcontainer.json inside the .devcontainer directory with
-  the following content:
+3. **Create Dockerfile:**
+  Create a file named Dockerfile at the root of the project with the following content:
+
+  ```dockerfile
+  FROM wordpress:php8.2-apache
+
+  # Install git
+  RUN apt-get update && apt-get install -y git
+
+  # Install WP-CLI
+  RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+      && chmod +x wp-cli.phar \
+      && mv wp-cli.phar /usr/local/bin/wp
+  ```
+
+4. **Configure DevContainer:**
+  Create a file named .devcontainer.json with the following content:
 
   ```json
   {
@@ -61,7 +75,7 @@ configured to run in Docker containers.
   }
   ```
 
-4. **Configure Docker Compose:**
+5. **Configure Docker Compose:**
   Create a file named docker-compose.yml at the root of the project with the
   following content:
 
@@ -70,7 +84,9 @@ configured to run in Docker containers.
 
   services:
     wordpress:
-      image: wordpress:php8.2-apache
+      build:
+        context: .
+        dockerfile: Dockerfile
       ports:
         - "8000:80"
       environment:
@@ -173,6 +189,14 @@ configured to run in Docker containers.
   chown -R www-data:www-data /var/www/html
   ```
 
+7. **Stop the containers:**
+
+  To stop the containers, run the following command:
+
+  ```sh
+  docker compose down
+  ```
+
 ## Benefits
 
 - **Isolation:** Docker containers provide isolation, ensuring that the WordPress application and the database have their own environments without conflicts with other applications on the host system.
@@ -180,3 +204,6 @@ configured to run in Docker containers.
 - **Easy Deployment and Scaling:** Docker simplifies the deployment process. You can deploy your WordPress application and database containers with a single command. Scaling becomes more manageable by replicating containers horizontally to handle increased traffic or load.
 - **Version Control:** Docker allows you to version control your application environments. By defining the environment in code (Dockerfile and docker-compose.yml), you can track changes over time and reproduce the same environment across different stages of development or on different machines.
 - **Environment Variables and Configurations:** Docker Compose enables you to set environment variables for configurations, such as database connection details, WordPress salts, etc. This allows for flexible and secure configuration management.
+
+## Based on
+https://medium.com/@samsaydali/dockerize-a-wordpress-website-phpmyadmin-and-its-database-51bab71666a9
